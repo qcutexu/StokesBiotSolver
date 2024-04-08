@@ -1,0 +1,11 @@
+#!/bin/bash
+#SBATCH -J pancreas_project_BIOT
+#SBATCH --output=pancreas_project.o%j
+#SBATCH --error=pancreas_project.e%j
+#SBATCH -p nocona
+#SBATCH -N 2
+#SBATCH --ntasks-per-node=15
+#SBATCH --mem-per-cpu=30GB
+#SBATCH -t 48:00:00
+export OMP_NUM_THREADS=1
+mpirun -np 30 python YifanMonolithic.py 
