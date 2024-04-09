@@ -1,9 +1,0 @@
-STEPS TO GENERATE MESH
-# gmsh pancreas.geo -3 -clmax 5 -clmin 1.2  -format msh2
-/Applications/Gmsh.app/Contents/MacOS/gmsh pancreas.geo -3 -clmax 0.0008 -format msh2 
-1049  dolfin-convert pancreas.msh pancreas.xml
-MAGNIFY
-
- 1052  python convert2hdf5.py
-
-
