@@ -1,4 +1,6 @@
-This repository contains two sets of code. One set is to solve the Stoke-Biot equation utilizing the diffuse interface approach, while the other set uses the monolithic approach.
+This repository contains two sets of code. 
+
+One set is to solve the Stoke-Biot equation utilizing the diffuse interface approach, while the other set uses the monolithic approach.
 The code using diffuse interface approach is documented in the paper.
 Bukač, M.; Čanić, S.; Boris, M; Wang, Y.; a computational algorithm for optimal design of a bioartificial organ scaffold architecture, submitted to PLOS.
 
