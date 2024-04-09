@@ -1,0 +1,178 @@
+real L=0.3;
+real R=1.5;
+real R1=0.03;
+real R2=0.021;
+real RR3=0.015;
+real middleTop=L/2.0;
+real chan=0.06;
+real level0=0.3;
+real level1=0.2;
+real level2=0.1;
+real level3=0;
+real levelm1=level0+chan;
+real midX1=0.5;
+real space=0;
+real totalL=3*L+2*space;
+real InL=0.06;
+real OutL=0.1;
+ 
+border H1l1O(t=-2.0/5.0*R, 6.0-2*R/5.0){x=t; y=5.0/3.0*(t+R); label=61;}
+border H1l3O(t=6-2.0*R/5.0, 18){x=t; y=10+R; label=61;}
+//border H1l5O(t=18.0+2.0*R/5.0, 24.0+R){x=t; y=-5.0/3.0*(t-24.0-R); label=4;}
+//border H1l6O(t=24+R, 18+2.0*R/5.0){x=t; y=5.0/3.0*(t-24-R); label=4;}
+//border H1l4O(t=18+2*R/5, 6-2*R/5){x=t; y=-10-R; label=2;}
+border H1l2O(t=6-R, -2.0/5.0*R){x=t; y=-5.0/3.0*(t+R); label=63;}
+border H1l7O(t=-2.0/5.0*R, -2*R){x=t; y=R; label=61;}
+border H1l9O(t=-2*R, -2.0/5.0*R){x=t; y=-R; label=63;}
+border H1l8O(t=0, 2*R){x=-2*R; y=R-t; label=2;}
+ 
+border H1l1I(t=R, 6.0+2*R/5.0){x=t; y=5.0/3.0*(t-R); label=51;}
+border H1l3I(t=6+2.0*R/5.0, 18-2*R/5){x=t; y=10-R; label=51;}
+border H1l5I(t=18.0-2.0*R/5.0, 24.0-R){x=t; y=-5.0/3.0*(t-24.0+R); label=51;}
+border H1l6I(t=24-R, 18-2.0*R/5.0){x=t; y=5.0/3.0*(t-24+R); label=51;}
+border H1l4I(t=18-2*R/5, 6+2*R/5){x=t; y=-10+R; label=51;}
+border H1l2I(t=6+2.0*R/5.0, R){x=t; y=-5.0/3.0*(t-R); label=51;}
+ 
+border H2l1I(t=R, 6.0+2*R/5.0){x=t+18+2.0*R/5.0; y=5.0/3.0*(t-R)+10; label=52;}
+border H2l3I(t=6+2.0*R/5.0, 18-2*R/5){x=t+18+2.0*R/5.0; y=10-R+10; label=52;}
+border H2l5I(t=18.0-2.0*R/5.0, 24.0-R){x=t+18+2.0*R/5.0; y=-5.0/3.0*(t-24.0+R)+10; label=52;}
+border H2l6I(t=24-R, 18-2.0*R/5.0){x=t+18+2.0*R/5.0; y=5.0/3.0*(t-24+R)+10; label=52;}
+border H2l4I(t=18-2*R/5, 6+2*R/5){x=t+18+2.0*R/5.0; y=-10+R+10; label=52;}
+border H2l2I(t=6+2.0*R/5.0, R){x=t+18+2.0*R/5.0; y=-5.0/3.0*(t-R)+10; label=52;}
+
+border H2l1O(t=-2.0/5.0*R, 6.0-2*R/5.0){x=t+18+2.0*R/5.0; y=5.0/3.0*(t+R)+10; label=61;}
+border H2l6O(t=R, 6.0+2*R/5.0){x=t+36+4.0*R/5.0; y=5.0/3.0*(t-R); label=54;}
+border H2l3O(t=6-2.0*R/5.0, 18+2.0*R/5){x=t+18+2.0*R/5.0; y=10+R+10; label=61;}
+border H2l5O(t=18.0+2.0*R/5.0, 24.0+2.0/5.0*R){x=t+18+2.0*R/5.0; y=-5.0/3.0*(t-24.0-R)+10; label=61;}
+border H2l7O(t=6, 6+2.0*R/5.0+8.0/5.0*R){x=t+36+4.0*R/5.0; y=10+R; label=61;}
+border H2l8O(t=0, 2*R){x=6+2.0*R/5.0+8.0/5.0*R+36+4.0*R/5.0; y=-R+t+10; label=7;}
+border H2l9O(t=6+2.0*R/5.0, 6+2.0*R/5.0+8.0/5.0*R){x=t+36+4.0*R/5.0; y=10-R; label=54;}
+
+//border H2l6O(t=24+R, 18+2.0*R/5.0){x=t+18+2.0*R/5.0; y=5.0/3.0*(t-24-R)+10; label=4;}
+
+ 
+border H3l1I(t=R, 6.0+2*R/5.0){x=t+18+2.0*R/5.0; y=5.0/3.0*(t-R)-10; label=53;}
+border H3l3I(t=6+2.0*R/5.0, 18-2*R/5){x=t+18+2.0*R/5.0; y=10-R-10; label=53;}
+border H3l5I(t=18.0-2.0*R/5.0, 24.0-R){x=t+18+2.0*R/5.0; y=-5.0/3.0*(t-24.0+R)-10; label=53;}
+border H3l6I(t=24-R, 18-2.0*R/5.0){x=t+18+2.0*R/5.0; y=5.0/3.0*(t-24+R)-10; label=53;}
+border H3l4I(t=18-2*R/5, 6+2*R/5){x=t+18+2.0*R/5.0; y=-10+R-10; label=53;}
+border H3l2I(t=6+2.0*R/5.0, R){x=t+18+2.0*R/5.0; y=-5.0/3.0*(t-R)-10; label=53;}
+
+border H3l5O(t=6+2.0*R/5.0, R){x=t+36+4.0*R/5.0; y=-5.0/3.0*(t-R); label=54;}
+border H3l6O(t=R, 6.0+2*R/5.0){x=t+36+4.0*R/5.0; y=5.0/3.0*(t-R)-20; label=56;}
+border H3l7O(t=6+2.0*R/5.0+8.0/5.0*R, 6+2*R/5){x=t+36+4.0*R/5.0; y=-10+R; label=54;}
+border H3l8O(t=0, 2*R){x=6+2.0*R/5.0+8.0/5.0*R+36+4.0*R/5.0; y=-R+t-10; label=7;}
+border H3l9O(t=6+2.0*R/5.0, 6+2.0*R/5.0+8.0/5.0*R){x=t+36+4.0*R/5.0; y=10-R-20; label=56;}
+
+
+
+border H5l1I(t=R, 6.0+2*R/5.0){x=t; y=5.0/3.0*(t-R)-20; label=55;}
+border H5l3I(t=6+2.0*R/5.0, 18-2*R/5){x=t; y=10-R-20; label=55;}
+border H5l5I(t=18.0-2.0*R/5.0, 24.0-R){x=t; y=-5.0/3.0*(t-24.0+R)-20; label=55;}
+border H5l6I(t=24-R, 18-2.0*R/5.0){x=t; y=5.0/3.0*(t-24+R)-20; label=55;}
+border H5l4I(t=18-2*R/5, 6+2*R/5){x=t; y=-10+R-20; label=55;}
+border H5l2I(t=6+2.0*R/5.0, R){x=t; y=-5.0/3.0*(t-R)-20; label=55;}
+
+border H5l1O(t=-2.0/5.0*R, 6.0-R){x=t; y=5.0/3.0*(t+R)-20; label=63;}
+border H5l4O(t=18+2*R/5, 6-2*R/5){x=t; y=-10-R-20; label=62;}
+border H5l2O(t=6-R, -2.0/5.0*R){x=t; y=-5.0/3.0*(t+R)-20; label=62;}
+border H5l7O(t=-2.0/5.0*R, -2*R){x=t; y=R-20; label=63;}
+border H5l9O(t=-2*R, -2.0/5.0*R){x=t; y=-R-20; label=62;}
+border H5l8O(t=0, 2*R){x=-2*R; y=R-t-20; label=4;}
+
+border H7l1O(t=-2.0/5.0*R, 6.0-R){x=t; y=5.0/3.0*(t+R)-40; label=63;}
+border H7l4O(t=18+2*R/5, 6-2*R/5){x=t; y=-10-R-40; label=62;}
+border H7l7O(t=-2.0/5.0*R, -2*R){x=t; y=R-40; label=63;}
+border H7l9O(t=-2*R, -2.0/5.0*R){x=t; y=-R-40; label=62;}
+border H7l8O(t=0, 2*R){x=-2*R; y=R-t-40; label=4;}
+border H7l2O(t=6-2.0*R/5.0, -2.0/5.0*R){x=t; y=-5.0/3.0*(t+R)-40; label=62;}
+border H7l6O(t=24+2.0/5.0*R, 18+2.0*R/5.0){x=t; y=5.0/3.0*(t-24-R)-40; label=62;}
+
+border H7l3I(t=18-2*R/5, 6+2*R/5){x=t; y=-10-R-20; label=62;}
+border H7l1I(t=R, 6.0+2*R/5.0){x=t; y=5.0/3.0*(t-R)-40; label=55;}
+border H7l5I(t=18.0-2.0*R/5.0, 24.0-R){x=t; y=-5.0/3.0*(t-24.0+R)-40; label=55;}
+border H7l6I(t=24-R, 18-2.0*R/5.0){x=t; y=5.0/3.0*(t-24+R)-40; label=55;}
+border H7l4I(t=18-2*R/5, 6+2*R/5){x=t; y=-10+R-40; label=55;}
+border H7l2I(t=6+2.0*R/5.0, R){x=t; y=-5.0/3.0*(t-R)-40; label=55;}
+
+
+
+border H8l4O(t=18+4.0*R/5, 6){x=t+18+2.0*R/5.0; y=-10-R-30; label=62;}
+border H8l5O(t=6+2.0*R/5.0, R){x=t+36+4.0*R/5.0; y=-5.0/3.0*(t-R)-20; label=56;}
+border H8l6O(t=2.0*R/5, 6.0+2*R/5.0){x=t+36+4.0*R/5.0; y=5.0/3.0*(t-R)-40; label=56;}
+border H8l7O(t=6+2.0*R/5.0+8.0/5.0*R, 6+2*R/5){x=t+36+4.0*R/5.0; y=-10+R-20; label=56;}
+border H8l9O(t=0, 2*R){x=6+2.0*R/5.0+8.0/5.0*R+36+4.0*R/5.0; y=-R+t-30; label=7;}
+border H8l8O(t=6+2.0*R/5.0+8.0/5.0*R, 6+2.0*R/5.0){x=t+36+4.0*R/5.0; y=-10-R-20; label=62;}
+
+
+
+//border H8l2I(t=6-2.0*R/5.0, -2.0/5.0*R){x=t+36+4.0*R/5.0; y=-5.0/3.0*(t+R)-20; label=62;}
+border H8l1I(t=R, 6.0+2*R/5.0){x=t+18+2.0*R/5.0; y=5.0/3.0*(t-R)-30; label=53;}
+border H8l3I(t=6+2.0*R/5.0, 18-2*R/5){x=t+18+2.0*R/5.0; y=-10-R-10; label=53;}
+border H8l5I(t=18.0-2.0*R/5.0, 24.0-R){x=t+18+2.0*R/5.0; y=-5.0/3.0*(t-24.0+R)-30; label=53;}
+border H8l6I(t=24-R, 18-2.0*R/5.0){x=t+18+2.0*R/5.0; y=5.0/3.0*(t-24+R)-30; label=53;}
+border H8l4I(t=18-2*R/5, 6+2*R/5){x=t+18+2.0*R/5.0; y=-10+R-30; label=53;}
+border H8l2I(t=6+2.0*R/5.0, R){x=t+18+2.0*R/5.0; y=-5.0/3.0*(t-R)-30; label=53;}
+
+
+//border H5l6O(t=24+2.0/5.0*R, 18+2.0*R/5.0){x=t; y=5.0/3.0*(t-24-R)-20; label=62;}
+
+/*
+int mm=6;
+int n=25;
+
+mesh ThF = buildmesh(
+H1l1O(-n)+H1l3O(-n)
++H2l1O(-n)+H2l3O(-n)+H2l5O(-n)+H2l7O(-mm)+H2l8O(mm)+H2l9O(mm)+H2l6O(n)
++H3l5O(n)+H3l7O(mm)+H3l8O(mm)+H3l9O(mm)+H3l6O(n)
++H8l5O(n)+H8l7O(mm)+H8l8O(-mm)+H8l9O(mm)+H8l6O(n)+H8l4O(-n)
++H7l6O(-n)+H7l4O(-n)+H7l2O(-n)+H7l7O(mm)+H7l8O(mm)+H7l9O(mm)+H7l1O(-n)
++H5l1O(-n)+H5l2O(-n)+H5l7O(mm)+H5l8O(mm)+H5l9O(mm)+H1l2O(-n)+H1l7O(mm)+H1l8O(mm)+H1l9O(mm)
++H7l1I(n)+H7l3I(-n)+H7l5I(n)+H7l6I(n)+H7l4I(n)+H7l2I(n)
++H8l1I(n)+H8l3I(n)+H8l5I(n)+H8l6I(n)+H8l4I(n)+H8l2I(n)
++H5l1I(n)+H5l3I(n)+H5l5I(n)+H5l6I(n)+H5l4I(n)+H5l2I(n)
++H3l1I(n)+H3l3I(n)+H3l5I(n)+H3l6I(n)+H3l4I(n)+H3l2I(n)
++H2l1I(n)+H2l3I(n)+H2l5I(n)+H2l6I(n)+H2l4I(n)+H2l2I(n)
++H1l1I(n)+H1l3I(n)+H1l5I(n)+H1l6I(n)+H1l4I(n)+H1l2I(n)
+,fixedborder=1);
+
+real scale = 0.3/(42+24.0/5*R);
+real shift = (totalL-(70+2*R)*scale)/2.0;
+ThF=movemesh(ThF, [scale*(x+2*R),scale*(y+50+R)]);
+ThF=movemesh(ThF, [-y+(70+2*R)*scale+shift, x]);
+*/
+//plot(ThF);
+
+//include "SaveVTK2d.edp";
+//fespace Pph(ThF,P1);
+//Pph phiplot,phiF,phiFold,zeta;
+
+//fespace PlotFh(ThF,[P1,P1]);  
+//PlotFh [plotux,plotuy];
+
+//postproc2D(phiF[],plotux[],ThF,"test.vtk");
+
+
+func real inlet(real X, real Y){
+	if(X>=totalL/4-totalL/8 && X<=totalL/4+totalL/8){
+		return (x-totalL/4-totalL/8)*(x-totalL/4+totalL/8)/((totalL/8)^2);	
+		}
+	else if(X>=3*totalL/4-totalL/8 && X<=3*totalL/4+totalL/8){
+		return (x-3*totalL/4-totalL/8)*(x-3*totalL/4+totalL/8)/((totalL/8)^2);		
+	}
+	else return 0;
+}
+
+
+func real inletc(real X, real Y){
+	if(X>=totalL/4-totalL/8 && X<=totalL/4+totalL/8){
+		return 1.0;	
+		}
+	else if(X>=3*totalL/4-totalL/8 && X<=3*totalL/4+totalL/8){
+		return 1.0;		
+	}
+	else return 0;
+}
+
+
+	
