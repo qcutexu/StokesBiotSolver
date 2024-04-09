@@ -1,0 +1,214 @@
+real L=0.3;
+real R1=0.03;
+real R2=0.02;
+real RR3=0.013;
+real middleTop=L/2.0;
+real chan=0.06;
+real level0=0.3;
+real level1=0.2;
+real level2=0.1;
+real level3=0;
+real levelm1=level0+chan;
+real midX1=0.5;
+real space=0;
+real totalL=3*L+2*space;
+real InL=0.06;
+real OutL=0.1;
+
+func real phi(real X, real Y, real eps){
+	//prvi stupac
+	if(Y>=level0 || Y<=level3){
+		return 1;
+		}
+	else if(Y<level0 && Y> level3){	
+		if(X<=L+space/2.0){
+			 if(Y>=level2 && Y<level1){
+				if(Y-(level2-level1)/(R1-R2-middleTop/2.0)*(X-middleTop/2.0)-level2<0 && X<=middleTop){
+					return 0.5*(1+tanh((Y-(level2-level1)/(R1-R2-middleTop/2.0)*(X-middleTop/2.0-R2)-level2)/eps));
+				}
+				else if(Y-(level2-level1)/(R1-R2-middleTop/2.0)*(X-middleTop/2.0)-level2>=0 && X<=middleTop){
+					return 0.5*(1+tanh(-(Y-(level2-level1)/(R1-R2-middleTop/2.0)*(X-middleTop/2.0+R2)-level2)/eps));
+				}
+				else if(Y+(level2-level1)/(R1-R2-middleTop/2.0)*(X-3*middleTop/2.0)-level2>0 && X>middleTop){
+					return 0.5*(1+tanh(-(Y+(level2-level1)/(R1-R2-middleTop/2.0)*(X-3*middleTop/2.0-R2)-level2)/eps));
+				}
+				else if(Y+(level2-level1)/(R1-R2-middleTop/2.0)*(X-3*middleTop/2.0)-level2<=0 && X>middleTop){
+					return 0.5*(1+tanh((Y+(level2-level1)/(R1-R2-middleTop/2.0)*(X-3*middleTop/2.0+R2)-level2)/eps));
+				}
+			}
+			else if(Y<level2 && Y>=level3){
+				//leg 1
+				if(Y-(level3-level2)/(R2-RR3-middleTop/4.0)*(X-middleTop/4.0)-level3<0 && X<=middleTop/2.0){
+					return 0.5*(1+tanh((Y-(level3-level2)/(R2-RR3-middleTop/4.0)*(X-middleTop/4.0-RR3)-level3)/eps));
+				}
+				else if(Y-(level3-level2)/(R2-RR3-middleTop/4.0)*(X-middleTop/4.0)-level3>=0 && X<=middleTop/2.0){
+					return 0.5*(1+tanh(-(Y-(level3-level2)/(R2-RR3-middleTop/4.0)*(X-middleTop/4.0+RR3)-level3)/eps));
+				}
+				//leg 2
+				else if(Y+(level3-level2)/(R2-RR3-middleTop/4.0)*(X-3*middleTop/4.0)-level3>0 && X>middleTop/2.0 && X<=middleTop){
+					return 0.5*(1+tanh(-(Y+(level3-level2)/(R2-RR3-middleTop/4.0)*(X-3*middleTop/4.0-RR3)-level3)/eps));
+				}
+				else if(Y+(level3-level2)/(R2-RR3-middleTop/4.0)*(X-3*middleTop/4.0)-level3<=0 && X>middleTop/2.0 && X<=middleTop){
+					return 0.5*(1+tanh((Y+(level3-level2)/(R2-RR3-middleTop/4.0)*(X-3*middleTop/4.0+RR3)-level3)/eps));
+				}
+				//leg 3
+				if(Y-(level3-level2)/(R2-RR3-middleTop/4.0)*(X-5*middleTop/4.0)-level3<0 && X>middleTop && X<=3*middleTop/2.0){
+					return 0.5*(1+tanh((Y-(level3-level2)/(R2-RR3-middleTop/4.0)*(X-5*middleTop/4.0-RR3)-level3)/eps));
+				}
+				else if(Y-(level3-level2)/(R2-RR3-middleTop/4.0)*(X-5*middleTop/4.0)-level3>=0 && X>middleTop && X<=3*middleTop/2.0){
+					return 0.5*(1+tanh(-(Y-(level3-level2)/(R2-RR3-middleTop/4.0)*(X-5*middleTop/4.0+RR3)-level3)/eps));
+				}
+				//leg 4
+				else if(Y+(level3-level2)/(R2-RR3-middleTop/4.0)*(X-7*middleTop/4.0)-level3>0 && X>3*middleTop/2.0 && X<=L){
+					return 0.5*(1+tanh(-(Y+(level3-level2)/(R2-RR3-middleTop/4.0)*(X-7*middleTop/4.0-RR3)-level3)/eps));
+				}
+				else if(Y+(level3-level2)/(R2-RR3-middleTop/4.0)*(X-7*middleTop/4.0)-level3<=0 && X>3*middleTop/2.0 && X<=L){
+					return 0.5*(1+tanh((Y+(level3-level2)/(R2-RR3-middleTop/4.0)*(X-7*middleTop/4.0+RR3)-level3)/eps));
+				}
+			}	
+			else { //(Y>=level1 && Y<=H){
+				if(X<=middleTop){
+					return 0.5*(1+tanh((X-(middleTop-R1))/eps));
+				}
+				else{
+					return 0.5*(1+tanh(-(X-(middleTop+R1))/(eps)));
+				}
+			}
+		}
+		//drugi stupac
+			if(X>L+space/2.0 && X<=2*L+3*space/2.0){
+			 if(Y>=level2 && Y<level1){
+				if(Y-(level2-level1)/(R1-R2-middleTop/2.0)*(X-middleTop/2.0-L-space)-level2<0 && X<=middleTop+L+space){
+					return 0.5*(1+tanh((Y-(level2-level1)/(R1-R2-middleTop/2.0)*(X-middleTop/2.0-R2-L-space)-level2)/eps));
+				}
+				else if(Y-(level2-level1)/(R1-R2-middleTop/2.0)*(X-middleTop/2.0-L-space)-level2>=0 && X<=middleTop+L+space){
+					return 0.5*(1+tanh(-(Y-(level2-level1)/(R1-R2-middleTop/2.0)*(X-middleTop/2.0+R2-L-space)-level2)/eps));
+				}
+				else if(Y+(level2-level1)/(R1-R2-middleTop/2.0)*(X-3*middleTop/2.0-L-space)-level2>0 && X>middleTop+L+space){
+					return 0.5*(1+tanh(-(Y+(level2-level1)/(R1-R2-middleTop/2.0)*(X-3*middleTop/2.0-R2-L-space)-level2)/eps));
+				}
+				else if(Y+(level2-level1)/(R1-R2-middleTop/2.0)*(X-3*middleTop/2.0-L-space)-level2<=0 && X>middleTop+L+space){
+					return 0.5*(1+tanh((Y+(level2-level1)/(R1-R2-middleTop/2.0)*(X-3*middleTop/2.0+R2-L-space)-level2)/eps));
+				}
+			}
+			else if(Y<level2 && Y>=level3){
+				//leg 1
+				if(Y-(level3-level2)/(R2-RR3-middleTop/4.0)*(X-middleTop/4.0-L-space)-level3<0 && X<=middleTop/2.0+L+space){
+					return 0.5*(1+tanh((Y-(level3-level2)/(R2-RR3-middleTop/4.0)*(X-middleTop/4.0-RR3-L-space)-level3)/eps));
+				}
+				else if(Y-(level3-level2)/(R2-RR3-middleTop/4.0)*(X-middleTop/4.0-L-space)-level3>=0 && X<=middleTop/2.0+L+space){
+					return 0.5*(1+tanh(-(Y-(level3-level2)/(R2-RR3-middleTop/4.0)*(X-middleTop/4.0+RR3-L-space)-level3)/eps));
+				}
+				//leg 2
+				else if(Y+(level3-level2)/(R2-RR3-middleTop/4.0)*(X-3*middleTop/4.0-L-space)-level3>0 && X>middleTop/2.0+L+space && X<=middleTop+L+space){
+					return 0.5*(1+tanh(-(Y+(level3-level2)/(R2-RR3-middleTop/4.0)*(X-3*middleTop/4.0-RR3-L-space)-level3)/eps));
+				}
+				else if(Y+(level3-level2)/(R2-RR3-middleTop/4.0)*(X-3*middleTop/4.0-L-space)-level3<=0 && X>middleTop/2.0+L+space && X<=middleTop+L+space){
+					return 0.5*(1+tanh((Y+(level3-level2)/(R2-RR3-middleTop/4.0)*(X-3*middleTop/4.0+RR3-L-space)-level3)/eps));
+				}
+				//leg 3
+				if(Y-(level3-level2)/(R2-RR3-middleTop/4.0)*(X-5*middleTop/4.0-L-space)-level3<0 && X>middleTop+L+space && X<=3*middleTop/2.0+L+space){
+					return 0.5*(1+tanh((Y-(level3-level2)/(R2-RR3-middleTop/4.0)*(X-5*middleTop/4.0-RR3-L-space)-level3)/eps));
+				}
+				else if(Y-(level3-level2)/(R2-RR3-middleTop/4.0)*(X-5*middleTop/4.0-L-space)-level3>=0 && X>middleTop+L+space && X<=3*middleTop/2.0+L+space){
+					return 0.5*(1+tanh(-(Y-(level3-level2)/(R2-RR3-middleTop/4.0)*(X-5*middleTop/4.0+RR3-L-space)-level3)/eps));
+				}
+				//leg 4
+				else if(Y+(level3-level2)/(R2-RR3-middleTop/4.0)*(X-7*middleTop/4.0-L-space)-level3>0 && X>3*middleTop/2.0+L+space && X<=2*L+space){
+					return 0.5*(1+tanh(-(Y+(level3-level2)/(R2-RR3-middleTop/4.0)*(X-7*middleTop/4.0-RR3-L-space)-level3)/eps));
+				}
+				else if(Y+(level3-level2)/(R2-RR3-middleTop/4.0)*(X-7*middleTop/4.0-L-space)-level3<=0 && X>3*middleTop/2.0+L+space && X<=2*L+space){
+					return 0.5*(1+tanh((Y+(level3-level2)/(R2-RR3-middleTop/4.0)*(X-7*middleTop/4.0+RR3-L-space)-level3)/eps));
+				}
+			}	
+			else { //(Y>=level1 && Y<=H){
+				if(X<=middleTop+L+space){
+					return 0.5*(1+tanh((X-(middleTop-R1)-L-space)/eps));
+				}
+				else{
+					return 0.5*(1+tanh(-(X-(middleTop+R1)-L-space)/(eps)));
+				}
+			}
+		}
+		//treci stupac
+			if(X>2*L+3*space/2.0){
+			 if(Y>=level2 && Y<level1){
+				if(Y-(level2-level1)/(R1-R2-middleTop/2.0)*(X-middleTop/2.0-2*(L+space))-level2<0 && X<=middleTop+2*(L+space)){
+					return 0.5*(1+tanh((Y-(level2-level1)/(R1-R2-middleTop/2.0)*(X-middleTop/2.0-R2-2*(L+space))-level2)/eps));
+				}
+				else if(Y-(level2-level1)/(R1-R2-middleTop/2.0)*(X-middleTop/2.0-2*(L+space))-level2>=0 && X<=middleTop+2*(L+space)){
+					return 0.5*(1+tanh(-(Y-(level2-level1)/(R1-R2-middleTop/2.0)*(X-middleTop/2.0+R2-2*(L+space))-level2)/eps));
+				}
+				else if(Y+(level2-level1)/(R1-R2-middleTop/2.0)*(X-3*middleTop/2.0-2*(L+space))-level2>0 && X>middleTop+2*(L+space)){
+					return 0.5*(1+tanh(-(Y+(level2-level1)/(R1-R2-middleTop/2.0)*(X-3*middleTop/2.0-R2-2*(L+space))-level2)/eps));
+				}
+				else if(Y+(level2-level1)/(R1-R2-middleTop/2.0)*(X-3*middleTop/2.0-2*(L+space))-level2<=0 && X>middleTop+2*(L+space)){
+					return 0.5*(1+tanh((Y+(level2-level1)/(R1-R2-middleTop/2.0)*(X-3*middleTop/2.0+R2-2*(L+space))-level2)/eps));
+				}
+			}
+			else if(Y<level2 && Y>=level3){
+				//leg 1
+				if(Y-(level3-level2)/(R2-RR3-middleTop/4.0)*(X-middleTop/4.0-2*(L+space))-level3<0 && X<=middleTop/2.0+2*(L+space)){
+					return 0.5*(1+tanh((Y-(level3-level2)/(R2-RR3-middleTop/4.0)*(X-middleTop/4.0-RR3-2*(L+space))-level3)/eps));
+				}
+				else if(Y-(level3-level2)/(R2-RR3-middleTop/4.0)*(X-middleTop/4.0-2*(L+space))-level3>=0 && X<=middleTop/2.0+2*(L+space)){
+					return 0.5*(1+tanh(-(Y-(level3-level2)/(R2-RR3-middleTop/4.0)*(X-middleTop/4.0+RR3-2*(L+space))-level3)/eps));
+				}
+				//leg 2
+				else if(Y+(level3-level2)/(R2-RR3-middleTop/4.0)*(X-3*middleTop/4.0-2*(L+space))-level3>0 && X>middleTop/2.0+2*(L+space) && X<=middleTop+2*(L+space)){
+					return 0.5*(1+tanh(-(Y+(level3-level2)/(R2-RR3-middleTop/4.0)*(X-3*middleTop/4.0-RR3-2*(L+space))-level3)/eps));
+				}
+				else if(Y+(level3-level2)/(R2-RR3-middleTop/4.0)*(X-3*middleTop/4.0-2*(L+space))-level3<=0 && X>middleTop/2.0+2*(L+space) && X<=middleTop+2*(L+space)){
+					return 0.5*(1+tanh((Y+(level3-level2)/(R2-RR3-middleTop/4.0)*(X-3*middleTop/4.0+RR3-2*(L+space))-level3)/eps));
+				}
+				//leg 3
+				if(Y-(level3-level2)/(R2-RR3-middleTop/4.0)*(X-5*middleTop/4.0-2*(L+space))-level3<0 && X>middleTop+2*(L+space) && X<=3*middleTop/2.0+2*(L+space)){
+					return 0.5*(1+tanh((Y-(level3-level2)/(R2-RR3-middleTop/4.0)*(X-5*middleTop/4.0-RR3-2*(L+space))-level3)/eps));
+				}
+				else if(Y-(level3-level2)/(R2-RR3-middleTop/4.0)*(X-5*middleTop/4.0-2*(L+space))-level3>=0 && X>middleTop+2*(L+space) && X<=3*middleTop/2.0+2*(L+space)){
+					return 0.5*(1+tanh(-(Y-(level3-level2)/(R2-RR3-middleTop/4.0)*(X-5*middleTop/4.0+RR3-2*(L+space))-level3)/eps));
+				}
+				//leg 4
+				else if(Y+(level3-level2)/(R2-RR3-middleTop/4.0)*(X-7*middleTop/4.0-2*(L+space))-level3>0 && X>3*middleTop/2.0+2*(L+space) && X<=L+2*(L+space)){
+					return 0.5*(1+tanh(-(Y+(level3-level2)/(R2-RR3-middleTop/4.0)*(X-7*middleTop/4.0-RR3-2*(L+space))-level3)/eps));
+				}
+				else if(Y+(level3-level2)/(R2-RR3-middleTop/4.0)*(X-7*middleTop/4.0-2*(L+space))-level3<=0 && X>3*middleTop/2.0+2*(L+space) && X<=L+2*(L+space)){
+					return 0.5*(1+tanh((Y+(level3-level2)/(R2-RR3-middleTop/4.0)*(X-7*middleTop/4.0+RR3-2*(L+space))-level3)/eps));
+				}
+			}	
+			else { //(Y>=level1 && Y<=H){
+				if(X<=middleTop+2*(L+space)){
+					return 0.5*(1+tanh((X-(middleTop-R1)-2*(L+space))/eps));
+				}
+				else{
+					return 0.5*(1+tanh(-(X-(middleTop+R1)-2*(L+space))/(eps)));
+				}
+			}
+		}
+	}
+}	
+
+
+func real inlet(real X, real Y){
+	if(X>=totalL/4-totalL/8 && X<=totalL/4+totalL/8){
+		return (x-totalL/4-totalL/8)*(x-totalL/4+totalL/8)/((totalL/8)^2);	
+		}
+	else if(X>=3*totalL/4-totalL/8 && X<=3*totalL/4+totalL/8){
+		return (x-3*totalL/4-totalL/8)*(x-3*totalL/4+totalL/8)/((totalL/8)^2);		
+	}
+	else return 0;
+}
+
+
+func real inletc(real X, real Y){
+	if(X>=totalL/4-totalL/8 && X<=totalL/4+totalL/8){
+		return 1.0;	
+		}
+	else if(X>=3*totalL/4-totalL/8 && X<=3*totalL/4+totalL/8){
+		return 1.0;		
+	}
+	else return 0;
+}
+
+
+	
